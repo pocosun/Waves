@@ -1,0 +1,36 @@
+{
+  "name": "Waves",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "pretest": "jshint ./bin",
+    "test": "echo \"Tests Complete\""
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "~1.13.2",
+    "connect-redis": "^3.0.2",
+    "cookie-parser": "~1.3.5",
+    "csurf": "^1.8.3",
+    "debug": "~2.2.0",
+    "disconnect": "^0.7.2",
+    "echonestjs": "0.0.5",
+    "express": "~4.13.1",
+    "express-session": "^1.13.0",
+    "helmet": "^1.3.0",
+    "jade": "~1.11.0",
+    "md5": "^2.1.0",
+    "mongoose": "^4.4.11",
+    "morgan": "~1.6.1",
+    "querystring": "^0.2.0",
+    "request": "^2.70.0",
+    "rovijs": "0.0.6",
+    "serve-favicon": "~2.3.0",
+    "socketio": "^1.0.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1"
+  }
+}

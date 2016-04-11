@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  section
+    if !users || users.length == 0
+      h3 No Users yet
+    else
+      each val in users
+        a
+          h3 Username: #{val.username}
+        br

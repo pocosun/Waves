@@ -1,14 +1,32 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+var compression = require('compression');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var session = require('express-session');
+
+var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Waves";
+
+var db = mongoose.connect(dbURL, function(err){
+  if(err) {
+    console.log("Could not connect to database.");
+    throw err;
+  }
+});
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
+
+var port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 var app = express();
+
+//Set up Socket.io and attach it to the app
+var io = require('./io');
+app.io = io;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,12 +36,19 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(compression());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  key: "sessionid",
+  secret: "Queen B",
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+routes(app);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

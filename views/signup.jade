@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  section#signup
+    form#signupForm(class="mainForm", name="signupForm", action="/signup", method="POST")
+      label(for="user") Username: 
+      input#user(type="text", name="username", placeholder="username")
+      br
+      label(for="pass") Password: 
+      input#pass(type="password", name="pass", placeholder="password")
+      br
+      label(for="pass2") Password: 
+      input#pass2(type="password", name="pass2", placeholder="retype password")
+      br
+      a#signupSubmit(class="formSubmit", href="#") Sign up
+  script(src='/javascripts/client.js')

@@ -6,6 +6,8 @@ block content
       h3 No Users yet
     else
       each val in users
-        a
-          h3 Username: #{val.username}
+        a(href='#')
+          h3 Username: 
+          p.userName(action='/userPage') #{val.username}
         br
+  script(src='/javascripts/client.js')

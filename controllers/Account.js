@@ -19,17 +19,21 @@ var userList = function(req, res){
 
 };
 
-var userPage = function(req, res){
+var user = function(req, res){
 	
-	Account.AccountModel.findOneUser(function(err, docs){
+	Account.AccountModel.findByUsername(req.body.name, function(err, docs){
 		if(err){
 			console.log(err);
 			return res.status(400).json({error:"Error"});
 		}
 
-		res.render('userPage', {user: docs});
+		res.json({redirect: '/userPage', user:docs});
 	});
 
+};
+
+var userPage = function(req, res){
+	res.render('userPage');
 };
 
 var loginPage = function(req, res){
@@ -102,4 +106,5 @@ module.exports.signupPage = signupPage;
 module.exports.signup = signup;
 module.exports.userList = userList;
 module.exports.accountPage = accountPage;
+module.exports.user = user;
 module.exports.userPage = userPage;

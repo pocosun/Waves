@@ -56,14 +56,14 @@ AccountSchema.methods.validatePassword = function(password, callback) {
 	});
 };
 
-AccountSchema.statics.findOneUser = function(name, callback) {
+/*AccountSchema.statics.findOneUser = function(name, callback) {
 
     var search = {
         username: name
     };
 
     return AccountModel.findOne(search, callback);
-};
+};*/
 
 AccountSchema.statics.findAllUsers = function(callback) {
 

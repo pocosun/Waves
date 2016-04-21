@@ -3,7 +3,8 @@ var models = require('../models');
 var Account = models.Account;
 
 var accountPage = function(req, res){
-	res.render('account', {user: req.session.account.username});
+	console.log(req.session.account)
+	res.render('account', {user: req.session.account});
 };
 
 var userList = function(req, res){
@@ -13,27 +14,15 @@ var userList = function(req, res){
 			console.log(err);
 			return res.status(400).json({error:"Error"});
 		}
-
+		console.log(docs);
 		res.render('users', {users: docs});
 	});
 
 };
 
-var user = function(req, res){
-	
-	Account.AccountModel.findByUsername(req.body.name, function(err, docs){
-		if(err){
-			console.log(err);
-			return res.status(400).json({error:"Error"});
-		}
-
-		res.json({redirect: '/userPage', user:docs});
-	});
-
-};
-
 var userPage = function(req, res){
-	res.render('userPage');
+	console.log(req);
+	res.render('userPage', {user:req.query});
 };
 
 var loginPage = function(req, res){
@@ -80,6 +69,7 @@ var signup = function(req, res){
 	Account.AccountModel.generateHash(req.body.pass, function(salt, hash){
 		var accountData = {
 			username:req.body.username,
+			artist:req.body.artist,
 			salt: salt,
 			password: hash
 		};
@@ -106,5 +96,4 @@ module.exports.signupPage = signupPage;
 module.exports.signup = signup;
 module.exports.userList = userList;
 module.exports.accountPage = accountPage;
-module.exports.user = user;
 module.exports.userPage = userPage;

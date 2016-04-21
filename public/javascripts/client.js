@@ -19,7 +19,8 @@ $(document).ready(function() {
             }
         });        
     }
-    
+
+
     $("#signupSubmit").on("click", function(e) {
         e.preventDefault();
     
@@ -51,7 +52,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $('.userName').on("click", function(e) {
+    /*$('.userName').on("click", function(e) {
         sendAjax($('.userName').attr('action'), {name:$(this).text()} );
-    });
+    });*/
 });

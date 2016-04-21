@@ -17,7 +17,7 @@ var AccountSchema = new mongoose.Schema({
 
     artist: {
         type: String,
-        //required: true,
+        required: true,
         unique: false
     },
 	
@@ -41,6 +41,7 @@ var AccountSchema = new mongoose.Schema({
 AccountSchema.methods.toAPI = function() {
     return {
         username: this.username,
+        artist: this.artist,
         _id: this._id 
     };
 };

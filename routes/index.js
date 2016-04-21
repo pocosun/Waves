@@ -13,7 +13,7 @@ var router = function(app){
 
 	app.get("/account", controllers.Account.accountPage);
 	app.get("/users", controllers.Account.userList);
-	app.post("/userPage", controllers.Account.user);
+
 	app.get("/userPage", controllers.Account.userPage);
 
 	app.get("/logout", controllers.Account.logout);

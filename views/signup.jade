@@ -12,5 +12,10 @@ block content
       label(for="pass2") Password: 
       input#pass2(type="password", name="pass2", placeholder="retype password")
       br
+      label(for='artist') Select an Artist:
+        select#artist(type='text', name='artist')
+          option(value='Britney') Britney
+          option(value='Beyonce') Beyonce
+      br
       a#signupSubmit(class="formSubmit", href="#") Sign up
   script(src='/javascripts/client.js')

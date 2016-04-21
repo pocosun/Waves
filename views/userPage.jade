@@ -3,5 +3,6 @@ extends layout
 block content
   p  
     | This is the account page belongs to 
-    b
+    b #{user.username}
+    | and they like #{user.artist}
   a(href='/users') Users

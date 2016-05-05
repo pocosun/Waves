@@ -52,7 +52,4 @@ $(document).ready(function() {
         return false;
     });
 
-    /*$('.userName').on("click", function(e) {
-        sendAjax($('.userName').attr('action'), {name:$(this).text()} );
-    });*/
 });

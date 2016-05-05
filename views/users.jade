@@ -1,13 +1,16 @@
 extends layout
 
 block content
-  section
-    if !users || users.length == 0
-      h3 No Users yet
-    else
-      each val in users
-        a(href='/userPage?username=#{val.username}&artist=#{val.artist}')
-          h3 Username: 
-          p.userName #{val.username}
-        br
+  #page-container
+    include navbar
+    section
+      if !users || users.length == 0
+        h3 No Users yet
+      else
+        each val in users
+          .userSelect
+            h1 Username: 
+            a(href='/userPage?username=#{val.username}&artist=#{val.artist}')
+              h2.userName #{val.username}
+            br
   script(src='/javascripts/client.js')

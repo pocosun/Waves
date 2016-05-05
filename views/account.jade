@@ -1,8 +1,15 @@
 extends layout
 
 block content
-  p  
-    | This is the account page belongs to 
-    b #{user.username}
-    | and they like #{user.artist}
-  a(href='/users') Users
+  #page-container
+    include navbar
+    #accountBox
+      h1  
+        | Hello 
+        b #{user.username}
+      h2 
+        |  You're selected artist is:
+        b
+          |  #{user.artist}
+      h3
+        | Please select another user using the "Users" tab

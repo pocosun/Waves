@@ -7,8 +7,8 @@ io.sockets.on("connection", function(socket) {
 	//utils.makePackage({'first': 'Taylor Swift', 'second': 'Kelly Clarkson'}, socket);
 
 	socket.on('serverArtist', function(data){
-        console.log("Hello");
-		//utils.makePackage(data, socket);
+        console.log("Searching...");
+		utils.makePackage(data, socket);
 	});
 });
 

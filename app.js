@@ -7,7 +7,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+var url = require('url');
 
+//Mongo
 var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Waves";
 
 var db = mongoose.connect(dbURL, function(err){
@@ -17,8 +20,20 @@ var db = mongoose.connect(dbURL, function(err){
   }
 });
 
+//Redis
+var redisURL = {
+  hostname: 'localhost',
+  port: 6379
+};
+
+var redisPASS;
+
+if(process.env.REDISCLOUD_URL){
+  redisURL = url.parse(process.env.REDISCLOUD_URL);
+  redisPASS = redisURL.auth.split(':')[1];
+}
+
 var routes = require('./routes/index');
-//var users = require('./routes/users');
 
 var port = process.env.PORT || process.env.NODE_PORT || 3000;
 

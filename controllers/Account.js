@@ -3,7 +3,6 @@ var models = require('../models');
 var Account = models.Account;
 
 var accountPage = function(req, res){
-	console.log(req.session.account)
 	res.render('account', {user: req.session.account});
 };
 

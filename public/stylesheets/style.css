@@ -1,15 +1,21 @@
 *{
 	padding: 0;
 	margin: 0;
+
 }
 
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body, a, select, button, input{
+	font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #F245A2;
+  color: #B53479;
   text-decoration: none;
 }
 
@@ -21,32 +27,85 @@ p{
 	display: inline-block;
 }
 
+input{
+	margin-bottom: 5px;
+}
+
+h1,h2{
+	margin-bottom: 10px;
+}
+
+
 #page-container{
 	width: 60%;
 	margin: 0 auto;
+	padding: 15px;
 }
 
 #navbar li{
 	display: inline-block;
 	padding-right: 10px;
+
 }
 
-#accountBox{
-	margin: 20px 0;
-}
-
-#loginBox{
-	width:300px;
+#loginBox, #signup{
+	min-width:300px;
+	width: 20%;
 	padding:20px;
-	text-align: center;
 	border: 1px solid #000;
 }
 
-.userSelect{
-	margin-top: 20px;
+#loginBox{
+	text-align: center;
+}
+
+#similarName{
+	margin: 20px 0;
+}
+
+.boxes{
+	margin-bottom: 10px;
+	border-radius: 3px;
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.4);
 }
 
 .center{
 	margin:0 auto;
 	display: block;
+}
+.left{
+	float: left;
+}
+
+.right{
+	float:right;
+}
+
+.s3{
+	width: 33%;
+	display: inline-block;
+	text-align: center;
+}
+
+.s3 button{
+	width:150px;
+	height: 40px;
+}
+
+.cover:hover{
+	cursor: pointer;
+}
+
+.cover.playing{
+	border: 3px solid #B53479;
+}
+
+.error{
+	width: 60%;
+	margin: 0 auto 10px auto;
+}
+
+.hidden{
+	display: none;
 }

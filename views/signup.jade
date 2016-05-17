@@ -1,29 +1,31 @@
 extends layout
 
 block content
-  section#signup
-    form#signupForm(class="mainForm", name="signupForm", action="/signup", method="POST")
-      label(for="user") Username: 
-      input#user(type="text", name="username", placeholder="username")
-      br
-      label(for="pass") Password: 
-      input#pass(type="password", name="pass", placeholder="password")
-      br
-      label(for="pass2") Password: 
-      input#pass2(type="password", name="pass2", placeholder="retype password")
-      br
-      label(for='artist') Select an Artist:
-        select#artist(type='text', name='artist')
-          option(value='Britney') Britney
-          option(value='Beyonce') Beyonce
-          option(value='Spice Girls') Spice Girls
-          option(value='Adele') Adele
-          option(value='Taylor Swift') Taylor Swift
-          option(value='Backsteet Boys') Backstreet Boys
-          option(value='Green Day') Green Day
-          option(value='Michael Jackson') Michael Jackson
-          option(value='Rihanna') Rihanna
-          option(value='Elvis Presley') Elvis Preseley
-      br
-      a#signupSubmit(class="formSubmit", href="#") Sign up
+  #page-container
+    .error.boxes.hidden
+    section#signup.center.boxes
+      form#signupForm(class="mainForm", name="signupForm", action="/signup", method="POST")
+        label(for="user") Username: 
+        input#user(type="text", name="username", placeholder="username")
+        br
+        label(for="pass") Password: 
+        input#pass(type="password", name="pass", placeholder="password")
+        br
+        label(for="pass2") Password: 
+        input#pass2(type="password", name="pass2", placeholder="retype password")
+        br
+        label(for='artist') Select an Artist:
+          select#artist(type='text', name='artist')
+            option(value='Britney') Britney
+            option(value='Beyonce') Beyonce
+            option(value='Spice Girls') Spice Girls
+            option(value='Adele') Adele
+            option(value='Taylor Swift') Taylor Swift
+            option(value='Backsteet Boys') Backstreet Boys
+            option(value='Green Day') Green Day
+            option(value='Michael Jackson') Michael Jackson
+            option(value='Rihanna') Rihanna
+            option(value='Elvis Presley') Elvis Preseley
+        br
+        a#signupSubmit(class="formSubmit", href="#") Sign up
   script(src='/javascripts/client.js')

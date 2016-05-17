@@ -2,15 +2,15 @@ extends layout
 
 block content
   #page-container
-    include navbar
+    .boxes
+      include navbar
     section
       if !users || users.length == 0
         h3 No Users yet
       else
         each val in users
-          .userSelect
+          .userSelect.boxes
             h1 Username: 
             a(href='/userPage?username=#{val.username}&artist=#{val.artist}')
               h2.userName #{val.username}
-            br
   script(src='/javascripts/client.js')

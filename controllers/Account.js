@@ -13,15 +13,13 @@ var userList = function(req, res){
 			console.log(err);
 			return res.status(400).json({error:"Error"});
 		}
-		console.log(docs);
 		res.render('users', {users: docs});
 	});
 
 };
 
 var userPage = function(req, res){
-	console.log(req);
-	res.render('userPage', {user:req.query});
+	res.render('userPage', {user:req});
 };
 
 var loginPage = function(req, res){
@@ -45,7 +43,7 @@ var login = function(req, res){
 
 	Account.AccountModel.authenticate(req.body.username, req.body.pass, function(err, account){
 		if (err || !account){
-			return res.status(400).json({error: "Wrong credentials"});
+			return res.status(400).json({error: "Wrong credentials!"});
 		}
 
 		req.session.account = account.toAPI();
@@ -58,11 +56,11 @@ var signup = function(req, res){
 
 	if(!req.body.username || !req.body.pass || !req.body.pass2){
 		console.log(req.body);
-		return res.status(400).json({error: "All fields are required, punk!"});
+		return res.status(400).json({error: "All fields are required!!"});
 	} 
 
 	if(req.body.pass !== req.body.pass2){
-		return res.status(400).json({error: "Passwords do not match, punk!"});
+		return res.status(400).json({error: "Passwords do not match!!"});
 	}
 
 	Account.AccountModel.generateHash(req.body.pass, function(salt, hash){
@@ -78,7 +76,7 @@ var signup = function(req, res){
 		newAccount.save(function(err){
 			if(err){
 				console.log(err);
-				return res.status(400).json({error: "Error has occured"});
+				return res.status(400).json({error: "Username taken!"});
 			}
 
 			req.session.account = newAccount.toAPI();

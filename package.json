@@ -29,6 +29,7 @@
     "rovijs": "0.0.6",
     "serve-favicon": "~2.3.0",
     "socketio": "^1.0.0",
+    "spotify-web-api-node": "^2.3.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

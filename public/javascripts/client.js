@@ -16,6 +16,9 @@ $(document).ready(function() {
                 var messageObj = JSON.parse(xhr.responseText);
             
                 console.log(messageObj.error);
+
+                $(".error").html("Error: " + messageObj.error);
+                $(".error").removeClass("hidden");
             }
         });        
     }
@@ -25,12 +28,14 @@ $(document).ready(function() {
         e.preventDefault();
     
         if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-            console.log("All fields are required");
+            $(".error").html("All fields required!");
+            $(".error").removeClass("hidden");
             return false;
         }
         
         if($("#pass").val() !== $("#pass2").val()) {
-            console.log("Passwords do not match");
+            $(".error").html("Passwords do not match!");
+            $(".error").removeClass("hidden");
             return false;           
         }
         
@@ -43,7 +48,8 @@ $(document).ready(function() {
         e.preventDefault();
     
         if($("#user").val() == '' || $("#pass").val() == '') {
-            console.log("Username or password is empty");
+            $(".error").html("Username or password is empty");
+            $(".error").removeClass("hidden");
             return false;
         }
 

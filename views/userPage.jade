@@ -2,12 +2,40 @@ extends layout
 
 block content
   #page-container
-    include navbar
-    #accountBox
+    .boxes
+      include navbar
+    .boxes
       h1  
         | This page belongs to:  
-        b #{user.username}
+        b #{user.query.username}
       h2 
-        |  And they like:
-        b
-          |  #{user.artist}
+        |  And they like: 
+        b #{user.query.artist}
+    .boxes
+      div
+        div.s3
+          h2#firstName #{user.session.account.artist}
+          img#image1(src='', width=200, height=200)
+        div.s3
+        div.s3
+          h2#secondName #{user.query.artist}
+          img#image2(src='', width=200, height=200)
+    .boxes
+      div.s3
+      div.s3
+        button#send Compare Artists
+      div.s3
+      div.s3
+      div.s3
+        h2#similarName
+      div.s3
+      div.results
+        div.s3
+          div#album1.cover
+        div.s3
+          div#album2.cover
+        div.s3
+          div#album3.cover
+        
+  script(src='socket.io/socket.io.js')
+  script(src='javascripts/socketHandler.js')

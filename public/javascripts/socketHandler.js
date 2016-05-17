@@ -1,47 +1,76 @@
-/**
- * Declare the form elements
- */
-var select1,
-    select2,
-    submit;
-var initializeFields = function() {
-    select1 = document.getElementById("first");
-    select2 = document.getElementById("second");
-    submit = document.getElementById("send");
-}
+var audioObject = null;
 
 var init = function(){
-    initializeFields();
+    var submit = document.getElementById('send');
+    var firstArtist = document.getElementById('firstName').innerHTML;
+    var secondArtist = document.getElementById('secondName').innerHTML;
+
+
     socket = io.connect();
 
-    //* This is where you will get your data package back *//
-    socket.on('package', function(data){
-    	var fImage = document.getElementById('fImage');
-        var fVideo = document.getElementById('fVideo');
-        var influ = document.getElementById('influ');
+    $('.cover').on('click', getTrack);
 
-        console.log(data);
+    socket.on('similarArtist', function(data){
+        document.getElementById('similarName').innerHTML = data.name;
 
-        fImage.src = data.first.images[0].url;
-        fVideo.src = data.first.video[0].url;
-        //influ.innerHTML = data.first.influencers[0].name;
+        $('.cover').css('height', '250');
+        $('.cover').css('width', '250');
+        $('#album1').css('background-image', 'url(' + data.albums[0].images[1].url + ')');
+        $('#album2').css('background-image', 'url(' + data.albums[1].images[1].url + ')');
+        $('#album3').css('background-image', 'url(' + data.albums[2].images[1].url + ')');
 
-        sImage.src = data.second.images[0].url;
-        sVideo.src = data.second.video[0].url;
-        //sinflu.innerHTML = data.second.influencers[0].name;
-        console.log(data.similar.song);
-        var audioObject = new Audio(data.similar.song);
-        audioObject.play();
+        $('#album1').attr('album-id', data.albums[0].id);
+        $('#album2').attr('album-id', data.albums[1].id);
+        $('#album3').attr('album-id', data.albums[2].id);
 
     });
+
+    socket.on('pictures', function(data){
+        var image1 = document.getElementById('image1');
+        var image2 = document.getElementById('image2');
+
+        image1.src = data.first;
+        image2.src = data.second;
+    })
     
-    //* This will be the function to get the artist and send it to socket to process *//
-    //* Use the 'serverArtist' as the emit command and put in your own variables for "first" and "second" *//
     var submitArtist = function(){
-        var firstArtist = select1.options[select1.selectedIndex].value;
-        var secondArtist = select2.options[select2.selectedIndex].value;
-        socket.emit('serverArtist', {first: firstArtist, second: secondArtist});
+        socket.emit('similarArtist', {first: firstArtist, second: secondArtist});
     }
+
     submit.addEventListener("click", submitArtist);
+
+    socket.emit('pictures', {first: firstArtist, second: secondArtist});
+}
+
+var getTrack = function(e){
+    var target= e.target;
+
+    if(target !== null && target.classList.contains('cover')){
+        if (target.classList.contains('playing')){
+            audioObject.pause();
+        }
+        else{
+            if(audioObject){
+                audioObject.pause();
+            }
+            socket.emit('tracks', {id: target.getAttribute('album-id')});
+        }
+    }
+
+    socket.on('track', function(data){
+        audioObject = new Audio(data);
+        audioObject.play();
+        target.classList.add('playing');
+        audioObject.addEventListener('ended', function () {
+            target.classList.remove('playing');
+            audioObject = null;
+            socket.removeAllListeners('track');
+        });
+        audioObject.addEventListener('pause', function () {
+            target.classList.remove('playing');
+            audioObject = null
+            socket.removeAllListeners('track');
+        });
+    })
 }
 window.onload = init;
